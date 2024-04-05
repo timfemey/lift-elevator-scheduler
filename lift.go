@@ -20,7 +20,7 @@ func Lift() *lift {
 		liftFloorSet: NewOrderedSet(),
 	}
 }
-func (l *lift) addFloor(sourceFloor, destinationFloor int) {
+func (l *lift) AddFloor(sourceFloor, destinationFloor int) {
 	l.lock.Lock()
 	defer l.lock.Unlock()
 
