@@ -30,9 +30,9 @@ func (s *OrderedSet) Add(req FloorRequest) {
 }
 
 func (s *OrderedSet) Remove(req FloorRequest) {
-	if _, exists := s.data[req]; !exists {
-		s.data[req] = struct{}{}
-		index := sort.Search(len(s.items), func(i int) bool { return s.items[i].Source >= req.Source })
+	if _, exists := s.data[req]; exists {
+		delete(s.data, req)
+		index := sort.Search(len(s.items), func(i int) bool { return s.items[i].Source == req.Source })
 		if index < len(s.items) && s.items[index].Source == req.Source {
 			s.items = append(s.items[:index], s.items[index+1:]...)
 		}
